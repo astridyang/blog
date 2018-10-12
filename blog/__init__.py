@@ -8,16 +8,8 @@ from blog.settings import config
 from blog.blueprints.admin import admin_bp
 from blog.blueprints.auth import auth_bp
 from blog.blueprints.blog import blog_bp
-from blog.extensions import db, login_manager, csrf, ckeditor, bootstrap
-from blog.models import Admin
-# app = Flask('blog')
-# config_name = os.getenv('FLASK_CONFIG', 'development')
-# app.config.from_object(config[config_name])
-# app.jinja_env.trim_blocks = True
-# app.jinja_env.lstrip_blocks = True
-# db = SQLAlchemy(app)
-
-# from blog import views, errors, commands
+from blog.extensions import db, login_manager, csrf, ckeditor, bootstrap, moment
+from blog.models import Admin, Post, Category
 
 
 def create_app(config_name=None):
@@ -30,7 +22,18 @@ def create_app(config_name=None):
     register_blueprints(app)
     register_commands(app)
     register_errors(app)
+    register_shell_context(app)
+    register_template_context(app)
     return app
+
+
+# todo
+def register_template_context(app):
+    @app.context_processor
+    def make_template_context():
+        admin = Admin.query.first()
+        categories = Category.query.order_by(Category.name).all()
+        return dict(admin=admin, categories=categories)
 
 
 def register_extensions(app):
@@ -39,6 +42,7 @@ def register_extensions(app):
     login_manager.init_app(app)
     csrf.init_app(app)
     ckeditor.init_app(app)
+    moment.init_app(app)
 
 
 def register_blueprints(app):
@@ -92,6 +96,7 @@ def register_commands(app):
             admin.set_password(password)
         else:
             click.echo('Creating the temporary administrator account...')
+            # todo
             admin = Admin(
                 username=username,
                 name='Admin',
@@ -100,3 +105,28 @@ def register_commands(app):
             db.session.add(admin)
         db.session.commit()
         click.echo('Done.')
+
+    @app.cli.command()
+    @click.option('--category', default=10, help='Quantity of categories, default is 10.')
+    @click.option('--post', default=50, help='Quantity of posts, default is 50.')
+    def forge(category, post):
+        """Generate fake data."""
+        from blog.fakes import fake_categorise, fake_posts
+
+        db.drop_all()
+        db.create_all()
+
+        click.echo('Generating %d categories...' % category)
+        fake_categorise(category)
+
+        click.echo('Generating %d posts...' % post)
+        fake_posts(post)
+
+        click.echo('Done')
+
+
+# todo
+def register_shell_context(app):
+    @app.shell_context_processor
+    def make_shell_context():
+        return dict(db=db, Admin=Admin, Post=Post, Category=Category)

@@ -3,13 +3,14 @@ from flask_login import LoginManager
 from flask_ckeditor import CKEditor
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
+from flask_moment import Moment
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 login_manager = LoginManager()
 csrf = CSRFProtect()
 ckeditor = CKEditor()
-
+moment = Moment()
 
 @login_manager.user_loader
 def load_user(user_id):
