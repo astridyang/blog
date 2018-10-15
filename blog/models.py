@@ -9,6 +9,9 @@ class Admin(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True)
     password_hash = db.Column(db.String(128))
     name = db.Column(db.String(30))
+    blog_title = db.Column(db.String(60))
+    blog_sub_title = db.Column(db.String(100))
+    about = db.Column(db.TEXT)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

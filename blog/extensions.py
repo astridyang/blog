@@ -4,6 +4,7 @@ from flask_ckeditor import CKEditor
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 from flask_moment import Moment
+from flask_migrate import Migrate
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -11,6 +12,8 @@ login_manager = LoginManager()
 csrf = CSRFProtect()
 ckeditor = CKEditor()
 moment = Moment()
+migrate = Migrate()
+
 
 @login_manager.user_loader
 def load_user(user_id):

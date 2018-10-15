@@ -26,3 +26,8 @@ def show_category(category_id):
     pagination = Post.query.with_parent(category).order_by(Post.timestamp.desc()).paginate(page, per_page)
     posts = pagination.items
     return render_template('blog/category.html', pagination=pagination, category=category, posts=posts)
+
+
+@blog_bp.route('/about')
+def about():
+    return render_template('blog/about.html')

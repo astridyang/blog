@@ -8,7 +8,7 @@ from blog.settings import config
 from blog.blueprints.admin import admin_bp
 from blog.blueprints.auth import auth_bp
 from blog.blueprints.blog import blog_bp
-from blog.extensions import db, login_manager, csrf, ckeditor, bootstrap, moment
+from blog.extensions import db, login_manager, csrf, ckeditor, bootstrap, moment, migrate
 from blog.models import Admin, Post, Category
 
 
@@ -43,6 +43,7 @@ def register_extensions(app):
     csrf.init_app(app)
     ckeditor.init_app(app)
     moment.init_app(app)
+    migrate.init_app(app, db)
 
 
 def register_blueprints(app):
@@ -96,10 +97,12 @@ def register_commands(app):
             admin.set_password(password)
         else:
             click.echo('Creating the temporary administrator account...')
-            # todo
             admin = Admin(
                 username=username,
                 name='Admin',
+                blog_title='Free planets',
+                blog_sub_title='頑張ってください。',
+                about='anything'
             )
             admin.set_password(password)
             db.session.add(admin)
