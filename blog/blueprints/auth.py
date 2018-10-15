@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, login_required, logout_user
 from blog.forms import LoginForm
 from blog.models import Admin
 from blog.utils import redirect_back
@@ -27,3 +27,11 @@ def login():
         else:
             flash('No account.', 'warning')
     return render_template('auth/login.html', form=form)
+
+
+@auth_bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logout success.', 'info')
+    return redirect_back()

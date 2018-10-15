@@ -11,8 +11,8 @@ Will be finished before October 30, 2018.
 **version 1.1**  
 2018/10/11:Create database and Admin table, init Admin account  
 2018/10/12:Use blueprints, login, create post table, forge data, display posts with pagination, display categorise, show post detail   
-Feature:show certain category posts, add and edit post  
-Feature:add category and delete category  
+2018/10/15:logout, show certain category posts, add and edit post, delete post
+Feature:add category and delete category, setting, manage post and category, links 
 Feature:use Flask-Migrade  
 Feature:use MySQL
 
