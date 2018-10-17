@@ -8,8 +8,10 @@ from blog.settings import config
 from blog.blueprints.admin import admin_bp
 from blog.blueprints.auth import auth_bp
 from blog.blueprints.blog import blog_bp
+from blog.blueprints.book import book_bp
+from blog.blueprints.link import link_bp
 from blog.extensions import db, login_manager, csrf, ckeditor, bootstrap, moment, migrate
-from blog.models import Admin, Post, Category
+from blog.models import Admin, Post, Category, Book, Link, BookCategory, LinkCategory
 
 
 def create_app(config_name=None):
@@ -48,6 +50,8 @@ def register_extensions(app):
 
 def register_blueprints(app):
     app.register_blueprint(blog_bp)
+    app.register_blueprint(book_bp)
+    app.register_blueprint(link_bp)
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
@@ -112,9 +116,14 @@ def register_commands(app):
     @app.cli.command()
     @click.option('--category', default=10, help='Quantity of categories, default is 10.')
     @click.option('--post', default=50, help='Quantity of posts, default is 50.')
-    def forge(category, post):
+    @click.option('--book_category', default=10, help='Quantity of book categories, default is 10.')
+    @click.option('--book', default=50, help='Quantity of books, default is 50.')
+    @click.option('--link_category', default=10, help='Quantity of link categories, default is 10.')
+    @click.option('--link', default=50, help='Quantity of links, default is 50.')
+    def forge(category, post, book_category, book, link_category, link):
         """Generate fake data."""
-        from blog.fakes import fake_categorise, fake_posts
+        from blog.fakes import fake_categorise, fake_posts, fake_book_categorise, \
+            fake_books, fake_link_categorise, fake_links
 
         db.drop_all()
         db.create_all()
@@ -125,6 +134,18 @@ def register_commands(app):
         click.echo('Generating %d posts...' % post)
         fake_posts(post)
 
+        click.echo('Generating %d bookCategories...' % book_category)
+        fake_book_categorise(book_category)
+
+        click.echo('Generating %d books...' % book)
+        fake_books(book)
+
+        click.echo('Generating %d link_categories...' % link_category)
+        fake_link_categorise(link_category)
+
+        click.echo('Generating %d links...' % link)
+        fake_links(link)
+
         click.echo('Done')
 
 
@@ -132,4 +153,5 @@ def register_commands(app):
 def register_shell_context(app):
     @app.shell_context_processor
     def make_shell_context():
-        return dict(db=db, Admin=Admin, Post=Post, Category=Category)
+        return dict(db=db, Admin=Admin, Post=Post, Category=Category,
+                    Book=Book, BookCategory=BookCategory, Link=Link, LinkCategory=LinkCategory)

@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, ValidationError
 from wtforms.validators import DataRequired, Length
 from flask_ckeditor import CKEditorField
-from blog.models import Category
+from blog.models import Category, BookCategory, LinkCategory
 
 
 class LoginForm(FlaskForm):
@@ -39,4 +39,49 @@ class SettingForm(FlaskForm):
     blog_sub_title = StringField('Blog sub title', validators=[DataRequired(), Length(1, 100)])
     about = CKEditorField('About page', validators=[DataRequired()])
     submit = SubmitField()
+
+
+class BookForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(1, 100)])
+    category = SelectField('Category',  coerce=int, default=1)
+    comment = CKEditorField('Comment')
+    submit = SubmitField()
+
+    def __init__(self, *args, **kwargs):
+        super(BookForm, self).__init__(*args, **kwargs)
+        self.category.choices = [(category.id, category.name)
+                                 for category in BookCategory.query.order_by(BookCategory.name).all()]
+
+
+class BookCategoryForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(1, 60)])
+    submit = SubmitField()
+
+    def validate_name(self, field):
+        if BookCategory.query.filter_by(name=field.data).first():
+            raise ValidationError('Name already in use')
+
+
+class LinkForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired(), Length(1, 60)])
+    url = StringField('Url', validators=[DataRequired(), Length(1, 100)])
+    category = SelectField('Category', coerce=int, default=1)
+    submit = SubmitField()
+
+    def __init__(self, *args, **kwargs):
+        super(LinkForm, self).__init__(*args, **kwargs)
+        self.category.choices = [(category.id, category.name)
+                                 for category in LinkCategoryForm.query.order_by(LinkCategoryForm.name).all()]
+
+
+class LinkCategoryForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(1,60)])
+    submit = SubmitField()
+
+    def validate_name(self, field):
+        if LinkCategory.query.filter_by(name=field.data).first():
+            raise ValidationError('Name already in use')
+
+
+
 

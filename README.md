@@ -12,13 +12,15 @@ Will be finished before October 30, 2018.
 + 2018/10/11:Create database and Admin table, init Admin account  
 + 2018/10/12:Use blueprints, login, create post table, forge data, display posts with pagination, display categorise, show post detail   
 + 2018/10/15:logout, show certain category posts, add and edit post, delete post, add category and delete category, settings, manage post and category, about, use Flask-Migrate
++ 2018/10/17: links list, books list
 + Migrate to MySQL  
 + Testing  
 + Deployment
 
 **version 1.2**  
-1.Feature:comments  
-2.Feature:links
+1.Feature: comments  
+2.Feature: links  
+3.Feature: full text search
 #### usage
 ```
 $ pipenv install --dev
@@ -48,3 +50,4 @@ rollback
 ```
 $ flask db downgrade
 ```
+flask db migrate -m "add books and links"

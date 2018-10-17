@@ -42,3 +42,54 @@ class Post(db.Model):
 
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     category = db.relationship('Category', back_populates='posts')
+
+
+class Book(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    comment = db.Column(db.TEXT)
+
+    category_id = db.Column(db.Integer, db.ForeignKey('book_category.id'))
+    category = db.relationship('BookCategory', back_populates='books')
+
+
+class BookCategory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(60), unique=True)
+
+    books = db.relationship('Book', back_populates='book_category')
+
+    def delete(self):
+        default_category = BookCategory.query.get(1)
+        books = self.books[:]
+        for book in books:
+            book.category = default_category
+        db.session.delete(self)
+        db.session.commit()
+
+
+class Link(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(60))
+    url = db.Column(db.String(200), unique=True)
+
+    category_id = db.Column(db.Integer, db.ForeignKey('link_category.id'))
+    category = db.relationship('LinkCategory', back_populates='links')
+
+
+class LinkCategory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(60), unique=True)
+
+    books = db.relationship('Link', back_populates='link_category')
+
+    def delete(self):
+        default_category = LinkCategory.query.get(1)
+        links = self.links[:]
+        for link in links:
+            link.category = default_category
+        db.session.delete(self)
+        db.session.commit()
+
+
