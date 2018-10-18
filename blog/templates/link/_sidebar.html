@@ -1,13 +1,13 @@
 {% if book_categories %}
     <div class="card mb-3">
-        <div class="card-header">Book Categories</div>
+        <div class="card-header">Link Categories</div>
         <ul class="list-group list-group-flush">
-            {% for category in book_categories %}
+            {% for category in link_categories %}
                 <li class="list-group-item  list-group-item-action d-flex justify-content-between align-items-center">
-                    <a href="{{ url_for('.show_book_category', category_id=category.id) }}">
+                    <a href="{{ url_for('.show_link_category', category_id=category.id) }}">
                         {{ category.name }}
                     </a>
-                    <span class="badge badge-primary badge-pill"> {{ category.books|length }}</span>
+                    <span class="badge badge-primary badge-pill"> {{ category.links|length }}</span>
                 </li>
             {% endfor %}
         </ul>

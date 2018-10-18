@@ -29,13 +29,14 @@ def create_app(config_name=None):
     return app
 
 
-# todo
 def register_template_context(app):
     @app.context_processor
     def make_template_context():
         admin = Admin.query.first()
         categories = Category.query.order_by(Category.name).all()
-        return dict(admin=admin, categories=categories)
+        book_categories = BookCategory.query.order_by(BookCategory.name).all()
+        link_categories = LinkCategory.query.order_by(LinkCategory.name).all()
+        return dict(admin=admin, categories=categories, book_categories=book_categories, link_categories=link_categories)
 
 
 def register_extensions(app):

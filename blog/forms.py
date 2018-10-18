@@ -71,11 +71,11 @@ class LinkForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(LinkForm, self).__init__(*args, **kwargs)
         self.category.choices = [(category.id, category.name)
-                                 for category in LinkCategoryForm.query.order_by(LinkCategoryForm.name).all()]
+                                 for category in LinkCategory.query.order_by(LinkCategory.name).all()]
 
 
 class LinkCategoryForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired(), Length(1,60)])
+    name = StringField('Name', validators=[DataRequired(), Length(1, 60)])
     submit = SubmitField()
 
     def validate_name(self, field):

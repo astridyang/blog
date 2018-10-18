@@ -23,9 +23,9 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
                     {{ render_nav_item('blog.index', 'Home') }}
-                    {{ render_nav_item('blog.about', 'About') }}
                     {{ render_nav_item('book.index', 'Book') }}
                     {{ render_nav_item('link.index', 'Link') }}
+                    {{ render_nav_item('blog.about', 'About') }}
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -39,6 +39,10 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url_for('admin.new_post') }}">Post</a>
                                 <a class="dropdown-item" href="{{ url_for('admin.new_category') }}">Category</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.new_book') }}">Book</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.new_book_category') }}">Book Category</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.new_link') }}">Link</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.new_link_category') }}">Link Category</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -53,6 +57,10 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url_for('admin.manage_post') }}">Post</a>
                                 <a class="dropdown-item" href="{{ url_for('admin.manage_category') }}">Category</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.manage_book') }}">Book</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.manage_book_category') }}">Book Category</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.manage_link') }}">Link</a>
+                                <a class="dropdown-item" href="{{ url_for('admin.manage_link_category') }}">Link Category</a>
                             </div>
                         </li>
                         {{ render_nav_item('admin.settings', 'Settings') }}

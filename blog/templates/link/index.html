@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-links index
-</body>
-</html>
+{% extends 'base.html' %}
+{% from 'bootstrap/pagination.html' import render_pager %}
+{% block title %}Book{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            {% include "link/_links.html" %}
+            {% if links %}
+                <div class="page-footer">{{ render_pager(pagination) }}</div>
+            {% endif %}
+        </div>
+        <div class="col-sm-4 sidebar">
+            {% include 'link/_sidebar.html' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

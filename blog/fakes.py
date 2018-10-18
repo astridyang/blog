@@ -76,7 +76,7 @@ def fake_link_categorise(count=10):
 def fake_links(count=50):
     for i in range(count):
         link = Link(
-            name=fake.sentence(),
+            title=fake.sentence(),
             url=fake.url(),
             category=LinkCategory.query.get(random.randint(1, LinkCategory.query.count()))
         )

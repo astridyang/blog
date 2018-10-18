@@ -58,7 +58,7 @@ class BookCategory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
 
-    books = db.relationship('Book', back_populates='book_category')
+    books = db.relationship('Book', back_populates='category')
 
     def delete(self):
         default_category = BookCategory.query.get(1)
@@ -73,6 +73,7 @@ class Link(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(60))
     url = db.Column(db.String(200), unique=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
 
     category_id = db.Column(db.Integer, db.ForeignKey('link_category.id'))
     category = db.relationship('LinkCategory', back_populates='links')
@@ -82,7 +83,7 @@ class LinkCategory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
 
-    books = db.relationship('Link', back_populates='link_category')
+    links = db.relationship('Link', back_populates='category')
 
     def delete(self):
         default_category = LinkCategory.query.get(1)

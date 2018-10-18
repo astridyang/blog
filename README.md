@@ -13,6 +13,8 @@ Will be finished before October 30, 2018.
 + 2018/10/12:Use blueprints, login, create post table, forge data, display posts with pagination, display categorise, show post detail   
 + 2018/10/15:logout, show certain category posts, add and edit post, delete post, add category and delete category, settings, manage post and category, about, use Flask-Migrate
 + 2018/10/17: links list, books list
++ 2018/10/18: books list, books detail, new book, edit book, delete book, manage book,
+category book list, new book cate, manage book category, edit book cate, delete book cate
 + Migrate to MySQL  
 + Testing  
 + Deployment
