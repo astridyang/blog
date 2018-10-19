@@ -196,7 +196,7 @@ def new_book_category():
         db.session.commit()
         flash("Book category created.", "success")
         return redirect(url_for('.manage_book_category'))
-    return render_template('admin/new_category.html', form=form)
+    return render_template('admin/new_category.html', form=form, title="book")
 
 
 @admin_bp.route('/book_category/<int:category_id>/edit', methods=['GET', 'POST'])
@@ -299,7 +299,7 @@ def new_link_category():
         db.session.commit()
         flash("Link category created.", "success")
         return redirect(url_for('.manage_link_category'))
-    return render_template('admin/new_category.html', form=form)
+    return render_template('admin/new_category.html', form=form, title='link')
 
 
 @admin_bp.route('/link_category/<int:category_id>/edit', methods=['GET', 'POST'])

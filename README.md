@@ -15,14 +15,16 @@ Will be finished before October 30, 2018.
 + 2018/10/17: links list, books list
 + 2018/10/18: books list, books detail, new book, edit book, delete book, manage book,
 category book list, new book cate, manage book category, edit book cate, delete book cate
-+ Migrate to MySQL  
++ 2018/10/19: debug, errors page
 + Testing  
++ Log
 + Deployment
 
 **version 1.2**  
 1.Feature: comments  
 2.Feature: links  
-3.Feature: full text search
+3.Feature: full text search  
+4.Migrate to MySQL 
 #### usage
 ```
 $ pipenv install --dev
