@@ -100,15 +100,16 @@ def edit_category(category_id):
     return render_template('admin/edit_category.html', form=form)
 
 
-# todo
 @admin_bp.route('/category/<int:category_id>/delete', methods=['POST'])
 @login_required
 def delete_category(category_id):
     category = Category.query.get_or_404(category_id)
-    db.session.delete(category)
-    db.session.commit()
+    if category.id == 1:
+        flash('You can not delete the default category.', 'warning')
+        return redirect(url_for('blog.index'))
+    category.delete()
     flash('Category deleted.', 'success')
-    return redirect_back()
+    return redirect(url_for('.manage_category'))
 
 
 @admin_bp.route('/settings', methods=['GET', 'POST'])
@@ -219,10 +220,12 @@ def edit_book_category(category_id):
 @login_required
 def delete_book_category(category_id):
     category = BookCategory.query.get_or_404(category_id)
-    db.session.delete(category)
-    db.session.commit()
-    flash("Book category deleted.", 'success')
-    return redirect_back()
+    if category.id == 1:
+        flash('You can not delete the default category.', 'warning')
+        return redirect(url_for('book.index'))
+    category.delete()
+    flash('Category deleted.', 'success')
+    return redirect(url_for('.manage_book_category'))
 
 
 @admin_bp.route('/book_category/manage')
@@ -319,11 +322,13 @@ def edit_link_category(category_id):
 @admin_bp.route('/link_category/<int:category_id>/delete', methods=['POST'])
 @login_required
 def delete_link_category(category_id):
-    category = LinkCategory.query.get(category_id)
-    db.session.delete(category)
-    db.session.commit()
-    flash("Link category deleted.", 'success')
-    return redirect_back()
+    category = LinkCategory.query.get_or_404(category_id)
+    if category.id == 1:
+        flash('You can not delete the default category.', 'warning')
+        return redirect(url_for('book.index'))
+    category.delete()
+    flash('Category deleted.', 'success')
+    return redirect(url_for('.manage_link_category'))
 
 
 @admin_bp.route('/link_category/manage')

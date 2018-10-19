@@ -36,7 +36,8 @@ def register_template_context(app):
         categories = Category.query.order_by(Category.name).all()
         book_categories = BookCategory.query.order_by(BookCategory.name).all()
         link_categories = LinkCategory.query.order_by(LinkCategory.name).all()
-        return dict(admin=admin, categories=categories, book_categories=book_categories, link_categories=link_categories)
+        return dict(admin=admin, categories=categories, book_categories=book_categories,
+                    link_categories=link_categories)
 
 
 def register_extensions(app):

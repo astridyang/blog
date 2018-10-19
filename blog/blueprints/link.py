@@ -20,3 +20,4 @@ def show_link_category(category_id):
     pagination = Link.query.with_parent(category).order_by(Link.timestamp.desc()).paginate(page, per_page=per_page)
     links = pagination.items
     return render_template('link/category.html', links=links, category=category, pagination=pagination)
+

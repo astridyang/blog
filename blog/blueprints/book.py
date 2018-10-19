@@ -23,8 +23,9 @@ def show_book_category(category_id):
     category = BookCategory.query.get_or_404(category_id)
     page = request.args.get('page', 1, type=int)
     per_page = current_app.config['BLOG_POST_PER_PAGE']
-    pagination = Book.query.with_parent(category).order_by(Book.timestamp.desc()).paginate(page, per_page=per_page)
+    pagination = Book.query.with_parent(category).order_by(Book.timestamp.desc()).paginate(page, per_page)
     books = pagination.items
-    return render_template('book/category.html', books=books, category=category, pagination=pagination)
+    return render_template('book/category.html', pagination=pagination, category=category, books=books)
+
 
 
