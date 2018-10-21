@@ -1,9 +1,9 @@
 from flask import Blueprint, flash, redirect, url_for, render_template, request, current_app
 from flask_login import login_required, current_user
-from blog.forms import PostForm, CategoryForm, SettingForm, BookForm, BookCategoryForm, LinkForm, LinkCategoryForm
-from blog.models import Post, Category, Book, BookCategory, Link, LinkCategory
-from blog.extensions import db
-from blog.utils import redirect_back
+from ..forms import PostForm, CategoryForm, SettingForm, BookForm, BookCategoryForm, LinkForm, LinkCategoryForm
+from ..models import Post, Category, Book, BookCategory, Link, LinkCategory
+from ..extensions import db
+from ..utils import redirect_back
 
 
 admin_bp = Blueprint('admin', __name__)

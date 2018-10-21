@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, current_app, request
-from blog.models import Link, LinkCategory
+from ..models import Link, LinkCategory
 link_bp = Blueprint('link', __name__)
 
 

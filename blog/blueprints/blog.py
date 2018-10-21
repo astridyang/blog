@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, current_app, request
-from blog.models import Post, Category
+from ..models import Post, Category
 blog_bp = Blueprint('blog', __name__)
 
 

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, current_app, request
-from blog.models import Book, BookCategory
+from ..models import Book, BookCategory
 book_bp = Blueprint('book', __name__)
 
 

@@ -29,3 +29,12 @@ models->forms->templates->views->migrate->fake data
 
 [markdown语法](https://github.com/younghz/Markdown)
 
++ 生成rsa
++ 修改config
++ 上传到服务器，修改目录权限700， 文件权限600
++ 修改服务器config，重启服务
+
+
++ 新建数据库
++ 修改数据库连接url
++ 修改setting
