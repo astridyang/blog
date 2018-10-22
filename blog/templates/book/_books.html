@@ -1,6 +1,6 @@
 {% if books %}
     {% for book in books %}
-        <h3 class="text-primary"><a href="{{ url_for('.show_book', book_id=book.id) }}">{{ book.name }}</a></h3>
+        <h4 class="text-primary"><a href="{{ url_for('.show_book', book_id=book.id) }}">{{ book.name }}</a></h4>
         <p>
             {{ book.comment|striptags|truncate }}
             <small><a href="{{ url_for('.show_book', book_id=book.id) }}">Read More</a></small>

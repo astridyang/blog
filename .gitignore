@@ -109,3 +109,5 @@ venv.bak/
 logs/*
 !logs/.gitkeep
 /deployment.md
+/notes.md
+/notes.md
