@@ -3,9 +3,8 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="page-header">
-{#        <h2 class="display-3">{{ admin.blog_title|default('Blog Title') }}</h2>#}
-{#        <h4 class="text-muted">&nbsp;{{ admin.blog_sub_title|default('Blog Subtitle') }}</h4>#}
+<div class="page-header text-right">
+<button id="J_open_cate" type="button" class="btn btn-secondary open_cate">Categories</button>
     </div>
     <div class="row">
         <div class="col-sm-8">
@@ -19,5 +18,5 @@
         </div>
     </div>
 {% endblock %}
-
+<script>alert(111)</script>
 {% block footer %}{% endblock %}

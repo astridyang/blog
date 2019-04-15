@@ -1,3 +1,4 @@
+
 nav {
     margin-bottom: 20px;
 }
@@ -22,7 +23,9 @@ nav {
 .sidebar {
     padding-left: 30px;
 }
-
+.open_cate{
+    display: none;
+}
 footer {
     margin-top: 30px;
     padding: 10px 0 40px;
@@ -43,4 +46,48 @@ footer {
     border: 1px solid #e1e4e8;
     border-radius: 3px;
     box-shadow: inset 0 0 10px rgba(27, 31, 35, 0.05);
+}
+@media only screen and (max-width:450px){
+    html,body{
+        height:100%;
+    }
+    body{
+        background: url(../img/bg-m.jpg) no-repeat center center fixed;
+        background-size: cover;
+        color: #a7a8ad;
+    }
+    a{
+        color: #f0eff5;
+    }
+    .bg-m{
+        background: rgba(0,0,0,0.6);
+        min-height: 100%;
+    }
+    .bg-primary{
+        background-color: rgba(0,0,0,0.2)!important;
+    }
+    .badge-primary{
+        background: #a7a8ad;
+    }
+    .sidebar .card, .sidebar .list-group-item{
+        background-color: rgba(0,0,0,0.6);
+    }
+    .page-link{
+        color: darkslategray;
+    }
+    .open_cate{
+        display: inline-block;
+    }
+    .sidebar {
+        position: fixed;
+        width: 300px;
+        top: 70px;
+        right: 0;
+        transform:translateX(100%);
+        transition: 0.7s linear;
+    }
+    .sidebar.show{
+        transform:translateX(0);
+    }
+
 }
